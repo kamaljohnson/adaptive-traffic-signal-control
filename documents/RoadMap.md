@@ -1,0 +1,3 @@
+ - [x] `DOC`Litrature Review
+ - [ ] `DOC`Proposed Architecture
+ - [ ] `DOC`Implementation Plan
