@@ -15,7 +15,7 @@ public class Vechicle : MonoBehaviour
     public float Speed;
     public float RotationRadius;
 
-    private float movementSnap = 1f;
+    private float movementSnap = 1;
 
     private List<bool> junctionPaths = new List<bool>
     {
@@ -27,11 +27,15 @@ public class Vechicle : MonoBehaviour
     private Vector3 destinationVector;
 
     private Direction currentMovingDirection;
+    private Direction nextDirection;
+    private int atJunctionSnapCounter;
 
     private bool isMoving;
     private bool atJunction;
-    private bool directionChanged;
     private bool movementSnapped;
+
+    private bool directionChanged;
+    private bool nextDirectionLocked;
 
     void Start()
     {
@@ -46,6 +50,7 @@ public class Vechicle : MonoBehaviour
             {
                 if(atJunction && !directionChanged)
                 {
+                    atJunctionSnapCounter++;
                     RotateRandom();
                 }
                 movementSnapped = false;
@@ -68,16 +73,17 @@ public class Vechicle : MonoBehaviour
         atJunction = false;
         destinationVector = transform.position + transform.forward * movementSnap;
         directionChanged = false;
+        atJunctionSnapCounter = -1;
+        Debug.Log(destinationVector);
     }
 
     private void Move(Direction direction)
     {
         transform.Translate(Vector3.forward * Speed * Time.deltaTime);
-
-        if (Vector3.Distance(transform.position, destinationVector) <= 0.01f)
+        if (Vector3.Distance(transform.position, destinationVector) <= 0.1f)
         {
             movementSnapped = true;
-            Debug.Log("Vehicle Snapped to grid");
+            Debug.Log("Snapped");
             transform.position = destinationVector;
             destinationVector += transform.forward * movementSnap;
         }
@@ -85,31 +91,54 @@ public class Vechicle : MonoBehaviour
 
     private void RotateRandom()
     {
-        var changeDirection = Direction.Forward;
-        var angle = 0;
-
-        while (true)
+        if(!nextDirectionLocked)
         {
-            changeDirection = (Direction)Random.Range(0, sizeof(Direction) - 1);
-            if(junctionPaths[(int)changeDirection])
+            nextDirection = Direction.Forward;
+            while (true)
             {
-                break;
+                nextDirection = (Direction)Random.Range(0, sizeof(Direction) - 1);
+                if(junctionPaths[(int)nextDirection])
+                {
+                    Debug.Log(nextDirection);
+                    nextDirectionLocked = true;
+                    nextDirection = Direction.Forward;
+                    Debug.Log(nextDirection);
+                    break;
+                }
             }
         }
 
-        switch (changeDirection)
+        var angle = -1;
+
+        switch (nextDirection)
         {
             case Direction.Right:
-                angle = 90;
+                if(atJunctionSnapCounter == 1)
+                {
+                    angle = 90;
+                }
                 break;
             case Direction.Left:
-                angle = -90;
+                if (atJunctionSnapCounter == 0)
+                {
+                    angle = -90;
+                }
+                break;
+            case Direction.Forward:
+                if (atJunctionSnapCounter == 2)
+                {
+                    angle = 0;
+                }
                 break;
         }
-
-        transform.RotateAround(transform.position, transform.up, angle);
-        currentMovingDirection = Direction.Forward;
-        directionChanged = true;
+        if(angle != -1)
+        {
+            transform.RotateAround(transform.position, transform.up, angle);
+            currentMovingDirection = Direction.Forward;
+            directionChanged = true;
+            atJunctionSnapCounter = -1;
+            nextDirectionLocked = false;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
