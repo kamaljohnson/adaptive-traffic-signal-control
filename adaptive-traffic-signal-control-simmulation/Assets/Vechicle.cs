@@ -52,6 +52,9 @@ public class Vechicle : MonoBehaviour
                 {
                     atJunctionSnapCounter++;
                     RotateRandom();
+                } else
+                {
+                    destinationVector += transform.forward * movementSnap;
                 }
                 movementSnapped = false;
             }
@@ -85,7 +88,6 @@ public class Vechicle : MonoBehaviour
             movementSnapped = true;
             Debug.Log("Snapped");
             transform.position = destinationVector;
-            destinationVector += transform.forward * movementSnap;
         }
     }
 
@@ -101,8 +103,6 @@ public class Vechicle : MonoBehaviour
                 {
                     Debug.Log(nextDirection);
                     nextDirectionLocked = true;
-                    nextDirection = Direction.Forward;
-                    Debug.Log(nextDirection);
                     break;
                 }
             }
@@ -133,7 +133,9 @@ public class Vechicle : MonoBehaviour
         }
         if(angle != -1)
         {
+            Debug.Log("Rotating");
             transform.RotateAround(transform.position, transform.up, angle);
+            destinationVector += transform.forward * movementSnap;
             currentMovingDirection = Direction.Forward;
             directionChanged = true;
             atJunctionSnapCounter = -1;
