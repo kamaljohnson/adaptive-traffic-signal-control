@@ -52,9 +52,6 @@ public class Vechicle : MonoBehaviour
                 {
                     atJunctionSnapCounter++;
                     RotateRandom();
-                } else
-                {
-                    destinationVector += transform.forward * movementSnap;
                 }
                 movementSnapped = false;
             }
@@ -85,9 +82,10 @@ public class Vechicle : MonoBehaviour
         transform.Translate(Vector3.forward * Speed * Time.deltaTime);
         if (Vector3.Distance(transform.position, destinationVector) <= 0.1f)
         {
-            movementSnapped = true;
             Debug.Log("Snapped");
+            movementSnapped = true;
             transform.position = destinationVector;
+            destinationVector = transform.position + transform.forward * movementSnap;
         }
     }
 
@@ -135,7 +133,8 @@ public class Vechicle : MonoBehaviour
         {
             Debug.Log("Rotating");
             transform.RotateAround(transform.position, transform.up, angle);
-            destinationVector += transform.forward * movementSnap;
+            destinationVector = transform.position + transform.forward * movementSnap;
+
             currentMovingDirection = Direction.Forward;
             directionChanged = true;
             atJunctionSnapCounter = -1;
