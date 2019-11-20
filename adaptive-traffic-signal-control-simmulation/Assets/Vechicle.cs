@@ -82,7 +82,6 @@ public class Vechicle : MonoBehaviour
         transform.Translate(Vector3.forward * Speed * Time.deltaTime);
         if (Vector3.Distance(transform.position, destinationVector) <= 0.1f)
         {
-            Debug.Log("Snapped");
             movementSnapped = true;
             transform.position = destinationVector;
             destinationVector = transform.position + transform.forward * movementSnap;
@@ -99,7 +98,6 @@ public class Vechicle : MonoBehaviour
                 nextDirection = (Direction)Random.Range(0, sizeof(Direction) - 1);
                 if(junctionPaths[(int)nextDirection])
                 {
-                    Debug.Log(nextDirection);
                     nextDirectionLocked = true;
                     break;
                 }
