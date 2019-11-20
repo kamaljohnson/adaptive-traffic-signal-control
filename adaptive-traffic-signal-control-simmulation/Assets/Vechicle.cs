@@ -15,10 +15,23 @@ public class Vechicle : MonoBehaviour
     public float Speed;
     public float RotationRadius;
 
+    private float movementSnap = 1f;
+
+    private List<bool> junctionPaths = new List<bool>
+    {
+        false,  //Direciton.Right
+        false,  //Direction.Left
+        false,  //Direction.Forward
+    };
+
+    private Vector3 destinationVector;
+
     private Direction currentMovingDirection;
 
     private bool isMoving;
     private bool atJunction;
+    private bool directionChanged;
+    private bool movementSnapped;
 
     void Start()
     {
@@ -29,9 +42,13 @@ public class Vechicle : MonoBehaviour
     {
         if(isMoving)
         {
-            if(CheckJunction())
+            if(movementSnapped)
             {
-                atJunction = true;
+                if(atJunction && !directionChanged)
+                {
+                    RotateRandom();
+                }
+                movementSnapped = false;
             }
             else
             {
@@ -46,36 +63,72 @@ public class Vechicle : MonoBehaviour
 
     private void Setup()
     {
-        currentMovingDirection = (Direction)Random.Range(0, sizeof(Direction) - 1);
+        currentMovingDirection = Direction.Forward;
         isMoving = true;
         atJunction = false;
+        destinationVector = transform.position + transform.forward * movementSnap;
+        directionChanged = false;
     }
 
     private void Move(Direction direction)
     {
-        switch (direction)
+        transform.Translate(Vector3.forward * Speed * Time.deltaTime);
+
+        if (Vector3.Distance(transform.position, destinationVector) <= 0.01f)
         {
-            case Direction.Right:
-                Rotate(direction);
-                break;
-            case Direction.Left:
-                Rotate(direction);
-                break;
-            case Direction.Forward:
-                transform.Translate(Vector3.forward * Speed * Time.deltaTime);
-                break;
+            movementSnapped = true;
+            Debug.Log("Vehicle Snapped to grid");
+            transform.position = destinationVector;
+            destinationVector += transform.forward * movementSnap;
         }
     }
 
-    private void Rotate(Direction direction)
+    private void RotateRandom()
     {
-        var angle = direction == Direction.Right ? 90 : -90;
+        var changeDirection = Direction.Forward;
+        var angle = 0;
+
+        while (true)
+        {
+            changeDirection = (Direction)Random.Range(0, sizeof(Direction) - 1);
+            if(junctionPaths[(int)changeDirection])
+            {
+                break;
+            }
+        }
+
+        switch (changeDirection)
+        {
+            case Direction.Right:
+                angle = 90;
+                break;
+            case Direction.Left:
+                angle = -90;
+                break;
+        }
+
         transform.RotateAround(transform.position, transform.up, angle);
         currentMovingDirection = Direction.Forward;
+        directionChanged = true;
     }
 
-    private bool CheckJunction()
+    private void OnTriggerEnter(Collider other)
     {
-        return false;
+        if(other.tag == "Junction")
+        {
+            directionChanged = false;
+            atJunction = true;
+            junctionPaths[(int)Direction.Right] = true;
+            junctionPaths[(int)Direction.Left] = true;
+            junctionPaths[(int)Direction.Forward] = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.tag == "Junction")
+        {
+            atJunction = false;
+        }
     }
 }
