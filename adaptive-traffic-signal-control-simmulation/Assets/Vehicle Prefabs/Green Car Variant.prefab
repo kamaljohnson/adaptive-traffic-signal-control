@@ -36,7 +36,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1210328970433854, guid: 2f29e951bc3d98845a396d5a437b7acb, type: 3}
       propertyPath: m_Name
-      value: Green Car
+      value: Green Car Variant
       objectReference: {fileID: 0}
     - target: {fileID: 1210328970433854, guid: 2f29e951bc3d98845a396d5a437b7acb, type: 3}
       propertyPath: m_IsActive
