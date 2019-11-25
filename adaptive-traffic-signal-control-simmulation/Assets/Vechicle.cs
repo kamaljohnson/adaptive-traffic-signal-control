@@ -1,13 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Direction
+public enum Direction   //cyclic order of directions
 {
-    Right,
-    Left,
     Forward,
-    Back
+    Right,
+    Back,
+    Left
 }
 
 public class Vechicle : MonoBehaviour
@@ -44,7 +45,7 @@ public class Vechicle : MonoBehaviour
 
     void Update()
     {
-        if(isMoving)
+        if (isMoving)
         {
             if(movementSnapped)
             {
@@ -95,10 +96,11 @@ public class Vechicle : MonoBehaviour
             nextDirection = Direction.Forward;
             while (true)
             {
-                nextDirection = (Direction)Random.Range(0, sizeof(Direction) - 1);
-                if(junctionPaths[(int)nextDirection])
+                nextDirection = (Direction)UnityEngine.Random.Range(0, sizeof(Direction) - 1);
+                if(junctionPaths[(int)nextDirection] & nextDirection != Direction.Back)
                 {
                     nextDirectionLocked = true;
+                    Debug.Log("direction: " + nextDirection);
                     break;
                 }
             }
@@ -144,11 +146,29 @@ public class Vechicle : MonoBehaviour
     {
         if(other.tag == "Junction")
         {
+            Debug.Log("at junction");
             directionChanged = false;
             atJunction = true;
-            junctionPaths[(int)Direction.Right] = true;
-            junctionPaths[(int)Direction.Left] = true;
-            junctionPaths[(int)Direction.Forward] = true;
+            junctionPaths = other.gameObject.GetComponent<Junction>().CheckJunctionPaths();
+
+            foreach (int direction in new List<int>(){0, 1, 2, 3})
+            {
+                if (junctionPaths[direction])
+                {
+                    switch ((Direction)direction)
+                    {
+                        case Direction.Right:
+                            Debug.DrawRay(transform.position + new Vector3(0, 0.2f, 0), transform.right, Color.white);
+                            break;
+                        case Direction.Left:
+                            Debug.DrawRay(transform.position + new Vector3(0, 0.2f, 0), -transform.right, Color.white);
+                            break;
+                        case Direction.Forward:
+                            Debug.DrawRay(transform.position + new Vector3(0, 0.2f, 0), transform.forward, Color.white);
+                            break;
+                    }
+                }
+            }
         }
     }
 
