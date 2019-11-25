@@ -51,10 +51,12 @@ public class Vechicle : MonoBehaviour
             {
                 if(atJunction && !directionChanged)
                 {
+                    Debug.Log(atJunctionSnapCounter);
                     atJunctionSnapCounter++;
                     RotateRandom();
                 }
                 movementSnapped = false;
+                Debug.Log("snapped");
             }
             else
             {
@@ -75,7 +77,6 @@ public class Vechicle : MonoBehaviour
         destinationVector = transform.position + transform.forward * movementSnap;
         directionChanged = false;
         atJunctionSnapCounter = -1;
-        Debug.Log(destinationVector);
     }
 
     private void Move(Direction direction)
@@ -150,25 +151,6 @@ public class Vechicle : MonoBehaviour
             directionChanged = false;
             atJunction = true;
             junctionPaths = other.gameObject.GetComponent<Junction>().CheckJunctionPaths();
-
-            foreach (int direction in new List<int>(){0, 1, 2, 3})
-            {
-                if (junctionPaths[direction])
-                {
-                    switch ((Direction)direction)
-                    {
-                        case Direction.Right:
-                            Debug.DrawRay(transform.position + new Vector3(0, 0.2f, 0), transform.right, Color.white);
-                            break;
-                        case Direction.Left:
-                            Debug.DrawRay(transform.position + new Vector3(0, 0.2f, 0), -transform.right, Color.white);
-                            break;
-                        case Direction.Forward:
-                            Debug.DrawRay(transform.position + new Vector3(0, 0.2f, 0), transform.forward, Color.white);
-                            break;
-                    }
-                }
-            }
         }
     }
 
