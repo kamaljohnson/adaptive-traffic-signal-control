@@ -142,6 +142,7 @@ MonoBehaviour:
   Back: 1
   currentTrafficLightGreenDireciton: 0
   trafficLightDuration: 5
+  trafficLightPresent: 0
   paths: 00000000
   trafficLights:
   - {fileID: 2852706458177759145}
@@ -159,8 +160,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.46751308, y: 0.365924, z: 0.53332645}
-  m_Center: {x: -0.7666669, y: 0.182962, z: 0.2666668}
+  m_Size: {x: 0.2341799, y: 0.365924, z: 0.5333265}
+  m_Center: {x: -0.8833337, y: 0.182962, z: 0.26666683}
 --- !u!65 &4976027514900545779
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -172,8 +173,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.53417975, y: 0.365924, z: 0.46665987}
-  m_Center: {x: 0.26666692, y: 0.182962, z: 0.7666669}
+  m_Size: {x: 0.5341798, y: 0.365924, z: 0.23332667}
+  m_Center: {x: 0.26666695, y: 0.182962, z: 0.8833337}
 --- !u!65 &9075702119418740645
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -185,8 +186,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5341803, y: 0.365924, z: 0.46665955}
-  m_Center: {x: -0.26666677, y: 0.182962, z: -0.7666666}
+  m_Size: {x: 0.5341803, y: 0.365924, z: 0.1999929}
+  m_Center: {x: -0.26666677, y: 0.182962, z: -0.9}
 --- !u!65 &8705417100247788296
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -198,8 +199,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.4675126, y: 0.365924, z: 0.53332686}
-  m_Center: {x: 0.76666665, y: 0.182962, z: -0.26666647}
+  m_Size: {x: 0.23417935, y: 0.365924, z: 0.53332686}
+  m_Center: {x: 0.8833334, y: 0.182962, z: -0.26666647}
 --- !u!1 &5058451432248379437
 GameObject:
   m_ObjectHideFlags: 0

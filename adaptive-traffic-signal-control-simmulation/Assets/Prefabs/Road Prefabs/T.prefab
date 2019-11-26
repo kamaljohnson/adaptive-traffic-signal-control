@@ -127,6 +127,7 @@ MonoBehaviour:
   Back: 1
   currentTrafficLightGreenDireciton: 0
   trafficLightDuration: 5
+  trafficLightPresent: 0
   paths: 00000000
   trafficLights:
   - {fileID: 6451591189283353443}
@@ -160,8 +161,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.53211415, y: 0.36592397, z: 0.4687333}
-  m_Center: {x: -0.26812476, y: 0.18296199, z: -0.76769996}
+  m_Size: {x: 0.53211415, y: 0.36592397, z: 0.23540013}
+  m_Center: {x: -0.26812476, y: 0.18296199, z: -0.8843667}
 --- !u!65 &6233236023765332445
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -173,8 +174,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5321137, y: 0.36592397, z: 0.4687338}
-  m_Center: {x: 0.265209, y: 0.18296199, z: 0.76563394}
+  m_Size: {x: 0.5321137, y: 0.36592397, z: 0.23540036}
+  m_Center: {x: 0.26520902, y: 0.18296199, z: 0.8823006}
 --- !u!65 &3451436217970450812
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -186,8 +187,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.46544713, y: 0.36592397, z: 0.53540087}
-  m_Center: {x: -0.768125, y: 0.18296199, z: 0.26563358}
+  m_Size: {x: 0.232114, y: 0.36592397, z: 0.53540087}
+  m_Center: {x: -0.8847918, y: 0.18296199, z: 0.26563358}
 --- !u!1001 &1177002137316034878
 PrefabInstance:
   m_ObjectHideFlags: 0
