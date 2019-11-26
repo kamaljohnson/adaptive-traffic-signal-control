@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Junction.cs" />
+    <Compile Include="Assets\Spawner.cs" />
     <Compile Include="Assets\Vechicle.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/projects/adaptive-traffic-signal-control/adaptive-traffic-signal-control-simmulation/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

@@ -22,7 +22,6 @@ public class Junction : MonoBehaviour
     public void Start()
     {
         CallibrateJunctionOrientation();
-        paths = CheckJunctionPaths();
     }
 
     public void Update()
@@ -56,24 +55,27 @@ public class Junction : MonoBehaviour
         junctionAngle %= 360;
 
         transform.eulerAngles = new Vector3(transform.eulerAngles.x, junctionAngle, transform.eulerAngles.z);
-    }
 
-    public List<bool> CheckJunctionPaths()
-    {
-        int offsetIndex = junctionAngle/90;
+        int offsetIndex = junctionAngle / 90;
 
         paths[(int)Direction.Right] = Right;
         paths[(int)Direction.Left] = Left;
         paths[(int)Direction.Forward] = Forward;
         paths[(int)Direction.Back] = Back;
 
-        return (RotateList<bool>(paths, offsetIndex, -1));
+        paths = RotateList<bool>(paths, offsetIndex, -1);
+    }
+
+    public List<bool> CheckJunctionPaths(Vector3 relativeForward)
+    {
+        return (paths);
     }
 
     public static List<T> RotateList<T>(List<T> list, int shift, int direction = 1)
     {
         int j = 0;
         List<T> temp_buffer = new List<T>();
+        List<T> rotated_list = new List<T>();
 
         if (direction == -1)
         {
@@ -89,15 +91,15 @@ public class Junction : MonoBehaviour
 
             if (i < list.Count - shift)
             {
-                list[i] = list[i + shift];
+                rotated_list.Add(list[i + shift]);
             }
             else
             {
-                list[i] = temp_buffer[j];
+                rotated_list.Add(temp_buffer[j]);
                 j++;
             }
         }
-        return list;
+        return rotated_list;
     }
 
     public void ResetPaths()
