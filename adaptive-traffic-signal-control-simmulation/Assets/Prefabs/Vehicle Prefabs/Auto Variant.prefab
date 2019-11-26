@@ -27,7 +27,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 3
   RotationRadius: 0
-  minSpacingDistance: 2
+  minSpacingDistance: 0.5
+  initialMovementDirection: 0
 --- !u!1001 &1406994634831616125
 PrefabInstance:
   m_ObjectHideFlags: 0

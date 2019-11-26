@@ -69,7 +69,7 @@ public class Vechicle : MonoBehaviour
 
         if(vehicleInfront)
         {
-            Debug.DrawRay(transform.position + new Vector3(0, 0.1f, 0), transform.forward * hit.distance, Color.yellow);
+            Debug.DrawRay(transform.position + new Vector3(0, 0.1f, 0), transform.forward * hit.distance, Color.red);
             isMoving = false;
         }
         else
