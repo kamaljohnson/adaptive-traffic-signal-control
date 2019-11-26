@@ -11,6 +11,11 @@ public class TrafficLight : MonoBehaviour
 
     public GameObject light;
 
+    public void Start()
+    {
+        ChangeLight(true);
+    }
+
     public void ChangeLight(bool state)
     {
         light.GetComponent<MeshRenderer>().material = state ? green : red;

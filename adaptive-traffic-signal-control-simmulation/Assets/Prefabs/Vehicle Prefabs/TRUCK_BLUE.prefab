@@ -96,9 +96,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5750604045235890098}
   - component: {fileID: 5750604045235764532}
+  - component: {fileID: 8830528055388771698}
   m_Layer: 0
   m_Name: TRUCK_BLUE
-  m_TagString: Untagged
+  m_TagString: Car
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -140,6 +141,19 @@ MonoBehaviour:
   RotationRadius: 0
   minSpacingDistance: 3
   initialMovementDirection: 0
+--- !u!65 &8830528055388771698
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5750604045235665810}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.093739, y: 1.5924413, z: 4.3267884}
+  m_Center: {x: 0, y: 0.8734716, z: -0.022785952}
 --- !u!1 &5750604045235665812
 GameObject:
   m_ObjectHideFlags: 0
