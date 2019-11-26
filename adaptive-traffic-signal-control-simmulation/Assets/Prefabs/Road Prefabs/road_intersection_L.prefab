@@ -136,7 +136,10 @@ MonoBehaviour:
   Left: 1
   Forward: 1
   Back: 0
+  currentTrafficLightGreenDireciton: 0
+  trafficLightDuration: 0
   paths: 00000000
+  trafficLights: []
 --- !u!65 &3702647904013752725
 BoxCollider:
   m_ObjectHideFlags: 0

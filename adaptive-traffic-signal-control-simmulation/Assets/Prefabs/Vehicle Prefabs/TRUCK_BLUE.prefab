@@ -96,7 +96,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5750604045235890098}
   - component: {fileID: 5750604045235764532}
-  - component: {fileID: 8830528055388771698}
+  - component: {fileID: 4241527691372751466}
   m_Layer: 0
   m_Name: TRUCK_BLUE
   m_TagString: Car
@@ -141,7 +141,7 @@ MonoBehaviour:
   RotationRadius: 0
   minSpacingDistance: 3
   initialMovementDirection: 0
---- !u!65 &8830528055388771698
+--- !u!65 &4241527691372751466
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

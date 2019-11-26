@@ -39,8 +39,20 @@ public class Spawner : MonoBehaviour
 
     public void SpawnVehicle()
     {
-        var vehicleIndex = UnityEngine.Random.Range(0, vehiclePrefabs.Count);
-        GameObject tempVehicle = Instantiate(vehiclePrefabs[vehicleIndex], transform.position, transform.rotation);
-        tempVehicle.GetComponent<Vechicle>().initialMovementDirection = direction;
+        RaycastHit hit;
+        bool vehicleInfront = false;
+        if (Physics.Raycast(transform.position + new Vector3(0, 0.1f, 0), transform.forward, out hit, 5))
+        {
+            if (hit.collider.tag == "Car")
+            {
+                vehicleInfront = true;
+            }
+        }
+        if(!vehicleInfront)
+        {
+            var vehicleIndex = UnityEngine.Random.Range(0, vehiclePrefabs.Count);
+            GameObject tempVehicle = Instantiate(vehiclePrefabs[vehicleIndex], transform.position, transform.rotation);
+            tempVehicle.GetComponent<Vechicle>().initialMovementDirection = direction;
+        }
     }
 }

@@ -48,6 +48,8 @@ public class Vechicle : MonoBehaviour
     private bool directionChanged;
     private bool nextDirectionLocked;
 
+    private bool isTrafficLightGreen;
+
     void Start()
     {
         Setup();
@@ -74,6 +76,11 @@ public class Vechicle : MonoBehaviour
         {
             Debug.DrawRay(transform.position + new Vector3(0, 0.1f, 0), transform.forward * minSpacingDistance, Color.white);
             isMoving = true;
+        }
+
+        if(!isTrafficLightGreen)
+        {
+            isMoving = false;
         }
 
         if (isMoving)
@@ -106,6 +113,8 @@ public class Vechicle : MonoBehaviour
         destinationVector = transform.position + transform.forward * movementSnap;
         directionChanged = false;
         atJunctionSnapCounter = -1;
+
+        isTrafficLightGreen = true;
     }
 
     private void Move(Direction direction)
@@ -156,6 +165,26 @@ public class Vechicle : MonoBehaviour
             directionChanged = false;
             atJunction = true;
             junctionPaths = other.gameObject.GetComponent<Junction>().CheckJunctionPaths(transform.forward);
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Junction")
+        {
+            isTrafficLightGreen = true;
+            if (other.gameObject.GetComponent<Junction>().trafficLightPresent)
+            {
+                isTrafficLightGreen = other.gameObject.GetComponent<Junction>().currentTrafficLightGreenDireciton == currentMovingDirection ? true : false;
+            }
+            if (isTrafficLightGreen)
+            {
+                Debug.Log("can go");
+            }
+            else
+            {
+                Debug.Log("stoped");
+            }
         }
     }
 

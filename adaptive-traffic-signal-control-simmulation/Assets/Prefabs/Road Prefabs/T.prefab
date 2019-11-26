@@ -129,10 +129,10 @@ MonoBehaviour:
   trafficLightDuration: 5
   paths: 00000000
   trafficLights:
-  - {fileID: 911998775168712903}
-  - {fileID: 0}
   - {fileID: 6451591189283353443}
   - {fileID: 4491137962717164849}
+  - {fileID: 911998775168712903}
+  - {fileID: 0}
 --- !u!54 &5056011104647140353
 Rigidbody:
   m_ObjectHideFlags: 0

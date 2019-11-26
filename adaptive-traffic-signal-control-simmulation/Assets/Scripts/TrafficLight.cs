@@ -13,7 +13,7 @@ public class TrafficLight : MonoBehaviour
 
     public void Start()
     {
-        ChangeLight(true);
+        ChangeLight(false);
     }
 
     public void ChangeLight(bool state)

@@ -15,6 +15,8 @@ public class Junction : MonoBehaviour
     public float trafficLightDuration;
     private float trafficLightTimer;
 
+    public bool trafficLightPresent;
+
     public List<bool> paths = new List<bool>
     {
         false,
@@ -23,11 +25,15 @@ public class Junction : MonoBehaviour
         false
     };
 
+
     public List<TrafficLight> trafficLights = new List<TrafficLight>();
+
 
     public void Start()
     {
+        trafficLightPresent = trafficLights.Count == 0 ? false : true;
         CallibrateJunctionOrientation();
+        trafficLightTimer = trafficLightDuration;
     }
 
     public void Update()
@@ -110,7 +116,7 @@ public class Junction : MonoBehaviour
         paths[(int)Direction.Back] = Back;
 
         paths = RotateList<bool>(paths, offsetIndex, -1);
-        if(trafficLights.Count != 0)
+        if(trafficLightPresent)
         {
             trafficLights = RotateList<TrafficLight>(trafficLights, offsetIndex, -1);
         }

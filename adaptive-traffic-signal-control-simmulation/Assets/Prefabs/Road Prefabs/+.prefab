@@ -144,10 +144,10 @@ MonoBehaviour:
   trafficLightDuration: 5
   paths: 00000000
   trafficLights:
-  - {fileID: 4669506899680148128}
-  - {fileID: 6318918200194766957}
   - {fileID: 2852706458177759145}
   - {fileID: 3029378114453812305}
+  - {fileID: 4669506899680148128}
+  - {fileID: 6318918200194766957}
 --- !u!65 &1001449276529188059
 BoxCollider:
   m_ObjectHideFlags: 0
