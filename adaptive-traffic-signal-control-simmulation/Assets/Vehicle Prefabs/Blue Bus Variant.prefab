@@ -25,8 +25,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42699f75af9f7ec4399b1df4246ab7d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 2
+  Speed: 4
   RotationRadius: 0
+  minSpacingDistance: 3
 --- !u!1001 &580274977156570614
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37,6 +38,10 @@ PrefabInstance:
     - target: {fileID: 1972778503850442, guid: 3e40e63120ffc954b98cd3c4273f271e, type: 3}
       propertyPath: m_Name
       value: Blue Bus Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 1972778503850442, guid: 3e40e63120ffc954b98cd3c4273f271e, type: 3}
+      propertyPath: m_TagString
+      value: Car
       objectReference: {fileID: 0}
     - target: {fileID: 4277298131223578, guid: 3e40e63120ffc954b98cd3c4273f271e, type: 3}
       propertyPath: m_LocalPosition.x

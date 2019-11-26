@@ -36,6 +36,7 @@ public class Vechicle : MonoBehaviour
 
     private Vector3 destinationVector;
 
+    public Direction initialMovementDirection;
     private Direction currentMovingDirection;
     private Direction nextDirection;
     private int atJunctionSnapCounter;
@@ -54,8 +55,6 @@ public class Vechicle : MonoBehaviour
 
     void Update()
     {
-        //Debug.DrawRay(transform.position + new Vector3(0, .1f, 0), transform.forward * 2f, Color.red);
-
         RaycastHit hit;
         bool vehicleInfront = false;
         if (Physics.Raycast(transform.position + new Vector3(0, 0.1f, 0), transform.forward, out hit, minSpacingDistance))
@@ -101,7 +100,7 @@ public class Vechicle : MonoBehaviour
 
     private void Setup()
     {
-        currentMovingDirection = Direction.Left;
+        currentMovingDirection = initialMovementDirection;
         isMoving = true;
         atJunction = false;
         destinationVector = transform.position + transform.forward * movementSnap;
@@ -112,7 +111,7 @@ public class Vechicle : MonoBehaviour
     private void Move(Direction direction)
     {
         transform.Translate(Vector3.forward * Speed * Time.deltaTime);
-        if (Vector3.Distance(transform.position, destinationVector) <= 0.1f)
+        if (Vector3.Distance(transform.position, destinationVector) <= Speed * Time.deltaTime)
         {
             movementSnapped = true;
             transform.position = destinationVector;
@@ -128,7 +127,7 @@ public class Vechicle : MonoBehaviour
             while (true)
             {
                 nextDirection = (Direction)UnityEngine.Random.Range(0, sizeof(Direction));
-                if (junctionPaths[(int)nextDirection] && ((int)currentMovingDirection - (int)nextDirection) % 2 != 0)
+                if (junctionPaths[(int)nextDirection] && !new List<int> { -2, 2 }.Contains(((int)currentMovingDirection - (int)nextDirection)))
                 {
                     nextDirectionLocked = true;
                     break;
@@ -136,8 +135,8 @@ public class Vechicle : MonoBehaviour
             }
         }
 
-        if (((new List<int> { -1, 3 }.Contains((int)nextDirection - (int)currentMovingDirection))) && atJunctionSnapCounter == 0 
-            || atJunctionSnapCounter == 1)
+        if (((new List<int> { -1, 3 }.Contains((int)nextDirection - (int)currentMovingDirection))) && atJunctionSnapCounter == 2
+            || atJunctionSnapCounter == 3)
         {
             transform.LookAt(transform.position + DirectionVectorGlobal[(int)nextDirection]);
             destinationVector = transform.position + DirectionVectorGlobal[(int)nextDirection] * movementSnap;
@@ -146,6 +145,7 @@ public class Vechicle : MonoBehaviour
             directionChanged = true;
             atJunctionSnapCounter = -1;
             nextDirectionLocked = false;
+            atJunction = false;
         }
     }
 
@@ -161,9 +161,9 @@ public class Vechicle : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.tag == "Junction")
+/*        if(other.tag == "Junction")
         {
             atJunction = false;
-        }
+        }*/
     }
 }

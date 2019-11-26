@@ -25,8 +25,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42699f75af9f7ec4399b1df4246ab7d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 2
+  Speed: 6
   RotationRadius: 0
+  minSpacingDistance: 3
 --- !u!1001 &3503779168201451773
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37,6 +38,10 @@ PrefabInstance:
     - target: {fileID: 1799405353078054, guid: 6210ca1233472c245960baa8c0615d44, type: 3}
       propertyPath: m_Name
       value: Hi-Ace Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 1799405353078054, guid: 6210ca1233472c245960baa8c0615d44, type: 3}
+      propertyPath: m_TagString
+      value: Car
       objectReference: {fileID: 0}
     - target: {fileID: 4122769446874454, guid: 6210ca1233472c245960baa8c0615d44, type: 3}
       propertyPath: m_LocalPosition.x

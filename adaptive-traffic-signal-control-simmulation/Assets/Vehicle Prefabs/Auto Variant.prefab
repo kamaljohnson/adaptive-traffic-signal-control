@@ -25,8 +25,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42699f75af9f7ec4399b1df4246ab7d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 2
+  Speed: 3
   RotationRadius: 0
+  minSpacingDistance: 2
 --- !u!1001 &1406994634831616125
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37,6 +38,10 @@ PrefabInstance:
     - target: {fileID: 1205955739765676, guid: c14cc8a314bda3b469e7b6c94f542ae2, type: 3}
       propertyPath: m_Name
       value: Auto Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 1205955739765676, guid: c14cc8a314bda3b469e7b6c94f542ae2, type: 3}
+      propertyPath: m_TagString
+      value: Car
       objectReference: {fileID: 0}
     - target: {fileID: 4982840834270080, guid: c14cc8a314bda3b469e7b6c94f542ae2, type: 3}
       propertyPath: m_LocalPosition.x

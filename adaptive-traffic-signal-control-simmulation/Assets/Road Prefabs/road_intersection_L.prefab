@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 1741082759569573837}
   - component: {fileID: 1741082759568475405}
   - component: {fileID: 1741082759558932493}
-  - component: {fileID: 3283881275066552265}
   - component: {fileID: 9035198198372495527}
   - component: {fileID: 1438462846696817290}
+  - component: {fileID: 3702647904013752725}
+  - component: {fileID: 5897055002032581209}
   m_Layer: 0
   m_Name: road_intersection_L
   m_TagString: Junction
@@ -103,19 +104,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!65 &3283881275066552265
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1741082759566220237}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.51898926, y: 0.365924, z: 0.5384718}
-  m_Center: {x: 0, y: 0.182962, z: 0.00000011920929}
 --- !u!54 &9035198198372495527
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -149,3 +137,29 @@ MonoBehaviour:
   Forward: 1
   Back: 0
   paths: 00000000
+--- !u!65 &3702647904013752725
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1741082759566220237}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5333339, y: 0.33000022, z: 0.50000036}
+  m_Center: {x: 0.26562804, y: 0.1661798, z: 0.75103396}
+--- !u!65 &5897055002032581209
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1741082759566220237}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.46666703, y: 0.33000022, z: 0.5333339}
+  m_Center: {x: -0.7677057, y: 0.1661798, z: 0.26770025}

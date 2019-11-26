@@ -62,9 +62,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\HighwalkerStudios\2DDN\Script\Cycle2DDN.cs" />
+    <Compile Include="Assets\HighwalkerStudios\2DDN\Script\Register2DDN.cs" />
+    <Compile Include="Assets\HighwalkerStudios\2DDN\Script\Shadow2DDN.cs" />
+    <Compile Include="Assets\HighwalkerStudios\2DDN\Script\Shadows2DDN.cs" />
     <Compile Include="Assets\Junction.cs" />
     <Compile Include="Assets\Spawner.cs" />
     <Compile Include="Assets\Vechicle.cs" />
+    <None Include="Assets\HighwalkerStudios\2DDN\Documentation\ReadMe.txt" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/projects/adaptive-traffic-signal-control/adaptive-traffic-signal-control-simmulation/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
