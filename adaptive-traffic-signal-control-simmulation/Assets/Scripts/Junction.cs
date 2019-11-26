@@ -11,6 +11,10 @@ public class Junction : MonoBehaviour
 
     private int junctionAngle;
 
+    public Direction currentTrafficLightGreenDireciton;
+    public float trafficLightDuration;
+    private float trafficLightTimer;
+
     public List<bool> paths = new List<bool>
     {
         false,
@@ -18,6 +22,8 @@ public class Junction : MonoBehaviour
         false,
         false
     };
+
+    public List<TrafficLight> trafficLights = new List<TrafficLight>();
 
     public void Start()
     {
@@ -47,6 +53,46 @@ public class Junction : MonoBehaviour
                 }
             }
         }
+
+        if(trafficLights.Count != 0)
+        {
+            if (trafficLightTimer > trafficLightDuration)
+            {
+                int rndDirection = 0;
+                while (true)
+                {
+                    rndDirection = Random.Range(0, trafficLights.Count);
+                    if(trafficLights[rndDirection] != null)
+                    {
+                        break;
+                    }
+                }
+                ChangeTrafficLightDirection((Direction) rndDirection);
+            }
+            else
+            {
+                trafficLightTimer += Time.deltaTime;
+            }
+        }
+    }
+
+    public void ChangeTrafficLightDirection(Direction direction)
+    {
+        if(trafficLights[(int)direction] != null)
+        {
+
+            if (trafficLights[(int)currentTrafficLightGreenDireciton] != null)
+            {
+                trafficLights[(int)currentTrafficLightGreenDireciton].ChangeLight(false);
+            }
+            trafficLights[(int)direction].ChangeLight(true);
+            currentTrafficLightGreenDireciton = direction;
+        } 
+        else
+        {
+            Debug.Log("Light missing");
+        }
+        trafficLightTimer = 0;
     }
 
     public void CallibrateJunctionOrientation()
@@ -64,6 +110,10 @@ public class Junction : MonoBehaviour
         paths[(int)Direction.Back] = Back;
 
         paths = RotateList<bool>(paths, offsetIndex, -1);
+        if(trafficLights.Count != 0)
+        {
+            trafficLights = RotateList<TrafficLight>(trafficLights, offsetIndex, -1);
+        }
     }
 
     public List<bool> CheckJunctionPaths(Vector3 relativeForward)
