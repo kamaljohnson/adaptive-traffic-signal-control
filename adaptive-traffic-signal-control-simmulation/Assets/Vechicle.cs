@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public enum Direction   //cyclic order of directions
@@ -25,6 +23,8 @@ public class Vechicle : MonoBehaviour
         false,  //Direction.Back
         false   //Direction.Left
     };
+
+    public float minSpacingDistance;
 
     public static List<Vector3> DirectionVectorGlobal = new List<Vector3>
     {
@@ -54,38 +54,36 @@ public class Vechicle : MonoBehaviour
 
     void Update()
     {
+        //Debug.DrawRay(transform.position + new Vector3(0, .1f, 0), transform.forward * 2f, Color.red);
 
-        foreach (int direction in new List<int>() { 0, 1, 2, 3 })
+        RaycastHit hit;
+        bool vehicleInfront = false;
+        if (Physics.Raycast(transform.position + new Vector3(0, 0.1f, 0), transform.forward, out hit, minSpacingDistance))
         {
-            if (junctionPaths[direction])
+            if(hit.collider.tag == "Car")
             {
-                switch ((Direction)direction)
-                {
-                    case Direction.Right:
-                        Debug.DrawRay(transform.position + new Vector3(0, 0.2f, 0), Vector3.right * 2f, Color.yellow);
-                        break;
-                    case Direction.Left:
-                        Debug.DrawRay(transform.position + new Vector3(0, 0.2f, 0), -Vector3.right * 2f, Color.yellow);
-                        break;
-                    case Direction.Forward:
-                        Debug.DrawRay(transform.position + new Vector3(0, 0.2f, 0), Vector3.forward * 2f, Color.yellow);
-                        break;
-                    case Direction.Back:
-                        Debug.DrawRay(transform.position + new Vector3(0, 0.2f, 0), -Vector3.forward * 2f, Color.yellow);
-                        break;
-                }
+                vehicleInfront = true;
             }
+        }
+
+        if(vehicleInfront)
+        {
+            Debug.DrawRay(transform.position + new Vector3(0, 0.1f, 0), transform.forward * hit.distance, Color.yellow);
+            isMoving = false;
+        }
+        else
+        {
+            Debug.DrawRay(transform.position + new Vector3(0, 0.1f, 0), transform.forward * minSpacingDistance, Color.white);
+            isMoving = true;
         }
 
         if (isMoving)
         {
             if (movementSnapped)
             {
-                Debug.Log("snapped : " + atJunction + " : " + directionChanged);
                 if (atJunction && !directionChanged)
                 {
                     atJunctionSnapCounter++;
-                    //Debug.Log(atJunctionSnapCounter);
                     RotateRandom();
                 }
                 movementSnapped = false;
@@ -133,19 +131,14 @@ public class Vechicle : MonoBehaviour
                 if (junctionPaths[(int)nextDirection] && ((int)currentMovingDirection - (int)nextDirection) % 2 != 0)
                 {
                     nextDirectionLocked = true;
-                    Debug.Log("direction: " + nextDirection);
                     break;
                 }
             }
         }
 
-        Debug.Log((int)nextDirection - (int)currentMovingDirection + " : " + atJunctionSnapCounter);
-
         if (((new List<int> { -1, 3 }.Contains((int)nextDirection - (int)currentMovingDirection))) && atJunctionSnapCounter == 0 
             || atJunctionSnapCounter == 1)
         {
-            Debug.Log("Rotating");
-
             transform.LookAt(transform.position + DirectionVectorGlobal[(int)nextDirection]);
             destinationVector = transform.position + DirectionVectorGlobal[(int)nextDirection] * movementSnap;
             currentMovingDirection = nextDirection;
