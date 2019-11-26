@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Cartoon Vehicles/Demo/scene.unity
+- path: Assets/Scenes/Traffic Simulator.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
